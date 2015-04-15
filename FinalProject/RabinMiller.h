@@ -10,8 +10,6 @@
 #include <cstring>
 #include <cstdlib>
 
-#include "BigInteger.hh"
-
 using namespace std;
 
 typedef long long longlong;
@@ -29,7 +27,7 @@ public:
 
 // Public
 
- bool RabinMiller::isRabinMillerPrime(longlong p, int iteration)
+bool RabinMiller::isRabinMillerPrime(longlong p, int iteration)
 {
     if (p < 2) {
         return false;
@@ -94,7 +92,4 @@ longlong RabinMiller::modulo(longlong base, longlong exponent, longlong mod)
     }
     return x % mod;
 }
-
-//#endif
-
 

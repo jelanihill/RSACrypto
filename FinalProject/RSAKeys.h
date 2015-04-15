@@ -17,7 +17,7 @@
 
 #include "RabinMiller.h"
 
-class RSAKey {
+class RSAKeys {
 
 private:
 
@@ -37,22 +37,26 @@ private:
     
     bool isLongLong(long double number);
     
+    void seedRandomNumber();
+    
 public:
     
-    RSAKey();
+    RSAKeys();
     
     longlong getPublicKey();
     longlong getPrivateKey();
     longlong getN();
 };
 
-RSAKey::RSAKey()
+RSAKeys::RSAKeys()
 {
     generateKeys();
 }
 
-void RSAKey::generateKeys()
+void RSAKeys::generateKeys()
 {
+    seedRandomNumber();
+    
     longlong p = generateRandomPrimeNumber();
     longlong q = generateRandomPrimeNumber();
     
@@ -67,7 +71,7 @@ void RSAKey::generateKeys()
     d = findPrivateKey(m, e);
 }
 
-longlong RSAKey::generateRandomPrimeNumber()
+longlong RSAKeys::generateRandomPrimeNumber()
 {
     longlong randomNum = rand() % 1000 + 100;
     
@@ -78,7 +82,7 @@ longlong RSAKey::generateRandomPrimeNumber()
     }
 }
 
-longlong RSAKey::findCoPrime(longlong number)
+longlong RSAKeys::findCoPrime(longlong number)
 {
     for (longlong i = 2; i < number; i++) {
         if (greatestCommonDivisor(number, i) == 1) {
@@ -88,7 +92,7 @@ longlong RSAKey::findCoPrime(longlong number)
     return 0;
 }
 
-longlong RSAKey::greatestCommonDivisor(longlong m, longlong n)
+longlong RSAKeys::greatestCommonDivisor(longlong m, longlong n)
 {
     if (n == 0) {
         return m;
@@ -96,7 +100,7 @@ longlong RSAKey::greatestCommonDivisor(longlong m, longlong n)
     return greatestCommonDivisor(n, m%n);
 }
 
-longlong RSAKey::findPrivateKey(longlong m, longlong e)
+longlong RSAKeys::findPrivateKey(longlong m, longlong e)
 {
     long double n = 0;
     while (true) {
@@ -109,24 +113,29 @@ longlong RSAKey::findPrivateKey(longlong m, longlong e)
     }
 }
 
-longlong RSAKey::getPublicKey()
+longlong RSAKeys::getPublicKey()
 {
     return e;
 }
 
-longlong RSAKey::getPrivateKey()
+longlong RSAKeys::getPrivateKey()
 {
     return d;
 }
 
-longlong RSAKey::getN()
+longlong RSAKeys::getN()
 {
     return n;
 }
 
-bool RSAKey::isLongLong(long double number)
+bool RSAKeys::isLongLong(long double number)
 {
     return number == (float)(longlong)number;
+}
+
+void RSAKeys::seedRandomNumber()
+{
+    srand((int)time(NULL));
 }
 
 
