@@ -35,7 +35,7 @@ private:
     longlong greatestCommonDivisor(longlong m, longlong n);
     longlong findPrivateKey(longlong m, longlong e);
     
-    bool isInteger(double number);
+    bool isLongLong(long double number);
     
 public:
     
@@ -56,11 +56,15 @@ void RSAKey::generateKeys()
     longlong p = generateRandomPrimeNumber();
     longlong q = generateRandomPrimeNumber();
     
+    cout << "p:" << p << endl;
+    cout << "q:" << q << endl;
+    cout << endl;
+    
     n = p * q;
     longlong m = (p - 1)*(q - 1);
     
     e = findCoPrime(m);
-    d = findPrivateKey(m,e);
+    d = findPrivateKey(m, e);
 }
 
 longlong RSAKey::generateRandomPrimeNumber()
@@ -76,7 +80,7 @@ longlong RSAKey::generateRandomPrimeNumber()
 
 longlong RSAKey::findCoPrime(longlong number)
 {
-    for (long i = 2; i < number; i++) {
+    for (longlong i = 2; i < number; i++) {
         if (greatestCommonDivisor(number, i) == 1) {
             return i;
         }
@@ -94,11 +98,11 @@ longlong RSAKey::greatestCommonDivisor(longlong m, longlong n)
 
 longlong RSAKey::findPrivateKey(longlong m, longlong e)
 {
-    double n = 0;
+    long double n = 0;
     while (true) {
-        double d = ((1 + (n*m)) / e);
-        if (isInteger(d)) {
-            return (long)d;
+        long double d = ((1 + (n*m)) / e);
+        if (isLongLong(d)) {
+            return (longlong)d;
         }
         
         n++;
@@ -120,9 +124,9 @@ longlong RSAKey::getN()
     return n;
 }
 
-bool RSAKey::isInteger(double number)
+bool RSAKey::isLongLong(long double number)
 {
-    return number == (float)(int)number;
+    return number == (float)(longlong)number;
 }
 
 
