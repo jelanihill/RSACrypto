@@ -12,12 +12,21 @@
 
 using namespace std;
 
+//-------- Forward Declarations --------
+void seedRandomNumber();
+
 int main(int argc, const char * argv[])
 {
+    seedRandomNumber();
+    
     RSAKey keys = RSAKey();
     cout << "Public Key is " << keys.getPublicKey() << endl;
     cout << "Private Key is " << keys.getPrivateKey() << endl;
     cout << "N is " << keys.getN() << endl;
     
     return 0;
+}
+
+void seedRandomNumber() {
+    srand(time(NULL));
 }

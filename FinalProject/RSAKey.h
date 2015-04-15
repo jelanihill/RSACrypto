@@ -18,8 +18,11 @@
 #include "RabinMiller.h"
 
 class RSAKey {
-    
+
 private:
+
+    // 40 gives us a solid guarantee that it's prime through the Rabin Miller Test
+    static const int kRabinMillerIterations = 40;
     
     longlong n;
     longlong e; // public key
@@ -32,7 +35,6 @@ private:
     longlong greatestCommonDivisor(longlong m, longlong n);
     longlong findPrivateKey(longlong m, longlong e);
     
-    bool isPrime(longlong number);
     bool isInteger(double number);
     
 public:
@@ -61,33 +63,14 @@ void RSAKey::generateKeys()
     d = findPrivateKey(m,e);
 }
 
-bool RSAKey::isPrime(longlong number)
-{
-    if (number < 2)
-        return false;
-    if (number == 2)
-        return true;
-    if (number % 2 == 0)
-        return false;
-    
-    for (int i = 3; i <= sqrt(number) + 1; i = i + 2) {
-        if (number%i == 0) {
-            return false;
-        }
-    }
-    return true;
-}
-
 longlong RSAKey::generateRandomPrimeNumber()
 {
-    srand(time(NULL));
-    long randomNum = rand() % 1000 + 100;
+    longlong randomNum = rand() % 1000 + 100;
     
-    while (true) {
-        if (isPrime(randomNum)) {
-            return randomNum;
-        }
-        randomNum++;
+    if (RabinMiller::isRabinMillerPrime(randomNum, kRabinMillerIterations)) {
+        return randomNum;
+    } else {
+        return generateRandomPrimeNumber();
     }
 }
 

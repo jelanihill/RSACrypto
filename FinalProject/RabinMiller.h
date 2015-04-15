@@ -10,6 +10,8 @@
 #include <cstring>
 #include <cstdlib>
 
+#include "BigInteger.hh"
+
 using namespace std;
 
 typedef long long longlong;
@@ -17,17 +19,17 @@ typedef long long longlong;
 class RabinMiller {
     
 private:
-    longlong mulMod(longlong a, longlong b, longlong mod);
-    longlong modulo(longlong base, longlong exponent, longlong mod);
+    static longlong mulMod(longlong a, longlong b, longlong mod);
+    static longlong modulo(longlong base, longlong exponent, longlong mod);
     
 public:
-    bool isRabinMillerPrime(longlong p, int iteration);
+    static bool isRabinMillerPrime(longlong p, int iteration);
     
 };
 
 // Public
 
-bool RabinMiller::isRabinMillerPrime(longlong p, int iteration)
+ bool RabinMiller::isRabinMillerPrime(longlong p, int iteration)
 {
     if (p < 2) {
         return false;
