@@ -60,6 +60,9 @@ void RSAKeys::generateKeys()
     longlong p = generateRandomPrimeNumber();
     longlong q = generateRandomPrimeNumber();
     
+//    longlong p = (longlong)4349;
+//    longlong q = (longlong)9901;
+    
     cout << "p:" << p << endl;
     cout << "q:" << q << endl;
     cout << endl;
@@ -73,7 +76,7 @@ void RSAKeys::generateKeys()
 
 longlong RSAKeys::generateRandomPrimeNumber()
 {
-    longlong randomNum = rand() % 1000 + 100;
+    longlong randomNum = rand() % 9000 + 1000;
     
     if (RabinMiller::isRabinMillerPrime(randomNum, kRabinMillerIterations)) {
         return randomNum;
@@ -130,7 +133,7 @@ longlong RSAKeys::getN()
 
 bool RSAKeys::isLongLong(long double number)
 {
-    return number == (float)(longlong)number;
+    return number == (long double)(longlong)number;
 }
 
 void RSAKeys::seedRandomNumber()
