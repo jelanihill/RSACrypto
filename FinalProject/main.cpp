@@ -8,8 +8,16 @@
 
 #include <iostream>
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+#include "RSAKey.h"
+
+using namespace std;
+
+int main(int argc, const char * argv[])
+{
+    RSAKey keys = RSAKey();
+    cout << "Public Key is " << keys.getPublicKey() << endl;
+    cout << "Private Key is " << keys.getPrivateKey() << endl;
+    cout << "N is " << keys.getN() << endl;
+    
     return 0;
 }
