@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Gonzalo Nunez. All rights reserved.
 //
 
+// This code was found online, modified, and made into a simple, well designed class.
+
 #include <iostream>
 #include <cstring>
 #include <cstdlib>

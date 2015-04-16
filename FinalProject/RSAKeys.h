@@ -21,7 +21,7 @@ class RSAKeys {
 
 private:
 
-    // 40 gives us a solid guarantee that it's prime through the Rabin Miller Test
+    // 40 gives us a very satisfactory guarantee that it's prime through the Rabin Miller Test
     static const int kRabinMillerIterations = 40;
     
     longlong n;
@@ -60,12 +60,9 @@ void RSAKeys::generateKeys()
     longlong p = generateRandomPrimeNumber();
     longlong q = generateRandomPrimeNumber();
     
-//    longlong p = (longlong)4349;
-//    longlong q = (longlong)9901;
-    
-    cout << "p:" << p << endl;
-    cout << "q:" << q << endl;
-    cout << endl;
+//    cout << "p:" << p << endl;
+//    cout << "q:" << q << endl;
+//    cout << endl;
     
     n = p * q;
     longlong m = (p - 1)*(q - 1);
